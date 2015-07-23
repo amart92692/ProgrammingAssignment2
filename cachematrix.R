@@ -1,9 +1,4 @@
-## title: cachematrix.R
-## author: Andrew Martinez
-## date: July 20, 2015
-## output: console
-
-## This assignment is to write a pair of functions that cache the inverse of a matrix.
+## For this assignment, we write a pair of functions that cache the inverse of a matrix.
 
 ## `makeCacheMatrix`: This function creates a special "matrix" object that can cache its inverse.
 
@@ -27,7 +22,7 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
                 i <- x$getinverse() # try to load inverse from cache
                 if(!is.null(i)) {   # check if object loaded from cache
-                    message("getting cached data") 
+                    message("getting cached data...") 
                     return(i) # return a matrix that is the inverse of 'x' that was loaded from cache
                 }
                 data <- x$get() # get internal matrix object
@@ -35,3 +30,31 @@ cacheSolve <- function(x, ...) {
                 x$setinverse(i) # set inverse result to cache
                 i # return a matrix that is the inverse of 'x' that was calculated
 }
+
+## Output Example:
+#> mat<-matrix(1:4, nrow=2, ncol=2)
+#> print(mat)
+#[,1] [,2]
+#[1,]    1    3
+#[2,]    2    4
+#> matrixx<-makeCacheMatrix(mat)
+#> matrixx$get()
+#[,1] [,2]
+#[1,]    1    3
+#[2,]    2    4
+#> matrixx$getinverse()
+#NULL
+#> cacheSolve(matrixx)
+#[,1] [,2]
+#[1,]   -2  1.5
+#[2,]    1 -0.5
+#> matrixx$getinverse()
+#[,1] [,2]
+#[1,]   -2  1.5
+#[2,]    1 -0.5
+#> cacheSolve(matrixx)
+#getting cached data...
+#[,1] [,2]
+#[1,]   -2  1.5
+#[2,]    1 -0.5
+#> 
